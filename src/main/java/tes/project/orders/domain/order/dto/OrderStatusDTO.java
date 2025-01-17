@@ -5,6 +5,6 @@ import jakarta.validation.constraints.Pattern;
 
 public record OrderStatusDTO(
     @NotNull(message = "Status cannot be null")
-    @Pattern(regexp = "pending|completed|canceled", message = "Invalid status value")
+    @Pattern(regexp = "pending|confirmed|canceled", message = "Invalid status value")
     String status
 ) {}

@@ -72,7 +72,7 @@ public class OrderController {
         Order order = orderRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Order not found with id: " + id));
 
-        if ("completed".equals(order.getStatus()) || "cancelled".equals(order.getStatus())) {
+        if ("confirmed".equals(order.getStatus()) || "cancelled".equals(order.getStatus())) {
             throw new IllegalStateException("Cannot update an order that is completed or cancelled");
         }
 
