@@ -72,8 +72,8 @@ public class OrderController {
         Order order = orderRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Order not found with id: " + id));
 
-        if ("confirmed".equals(order.getStatus()) || "cancelled".equals(order.getStatus())) {
-            throw new IllegalStateException("Cannot update an order that is completed or cancelled");
+        if ("confirmed".equals(order.getStatus()) || "canceled".equals(order.getStatus())) {
+            throw new IllegalStateException("Cannot update an order that is confirmed or canceled");
         }
 
         if (orderUpdateDTO.products() != null && !orderUpdateDTO.products().isEmpty()) {
@@ -103,7 +103,7 @@ public class OrderController {
         Order order = orderRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Order not found with id: " + id));
 
-        if ("completed".equals(order.getStatus()) || "canceled".equals(order.getStatus())) {
+        if ("confirmed".equals(order.getStatus()) || "canceled".equals(order.getStatus())) {
             throw new IllegalStateException("Cannot change a closed order");
         }
         
@@ -118,8 +118,8 @@ public class OrderController {
         Order order = orderRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Order not found with id: " + id));
 
-        if ("completed".equals(order.getStatus()) || "canceled".equals(order.getStatus())) {
-            throw new IllegalStateException("Cannot delete a completed order");
+        if ("confirmed".equals(order.getStatus()) || "canceled".equals(order.getStatus())) {
+            throw new IllegalStateException("Cannot delete a confirmed order");
         }
         
         orderRepository.deleteById(id);
